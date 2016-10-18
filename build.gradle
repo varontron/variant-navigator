@@ -1,0 +1,68 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+def TOMCAT_HOME = System.getenv("TC_HOME")
+def TOMCAT_BIN  = System.getenv("TC_BIN")
+
+apply plugin: 'waroverlay'
+
+repositories {
+  mavenCentral()
+  maven {
+      //url "https://oss.sonatype.org/content/repositories/snapshots"
+      url "https://oss.sonatype.org/content/repositories/releases"
+  }
+}
+
+// changes the context/environment of this build script
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.scaldingspoon.gradle:gradle-waroverlay-plugin:0.9.3"
+    }
+}
+
+dependencies {
+  runtime ('com.novartis.opensource:YADA-Quickstart:8.3.0@war') {
+    transitive = true 
+  }
+}
+
+task shutdownTomcat(type:Exec) {
+  workingDir TOMCAT_BIN
+  commandLine './catalina.sh', 'stop'
+}
+
+task startupTomcat(dependsOn: 'copyToServer', type:Exec) {
+  workingDir TOMCAT_BIN
+  commandLine './catalina.sh', 'jpda', 'start'
+}
+
+task deployLocal(dependsOn: 'startupTomcat') << {
+  println "Deployment successful"
+}
+
+task cleanServer(dependsOn: 'shutdownTomcat', type:Delete) {
+  delete TOMCAT_HOME+'/webapps/'+project.name
+}
+
+task copyToServer(dependsOn: ['war','cleanServer'], type:Copy) {
+  from 'build/libs'
+  into TOMCAT_HOME +'/webapps'
+}
+
+warOverlay {
+  includeWarJars true
+}
+
+war {
+  from('resources')  {
+        include '*.properties'
+        into 'WEB-INF/classes/'
+  }  
+  exclude '**/yada-api-7.1.2.jar'
+}
+war.dependsOn shutdownTomcat
+
+

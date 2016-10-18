@@ -1,0 +1,9 @@
+{
+	"context"    : "variant-navigator",
+  "domain"     : "",
+  "loggedUser" : "YADABOT",
+  "yadaDev"    : "localhost:8081",
+  "yadaTest"   : "",
+  "yadaLoad"   : "",
+  "yadaProd"   : ""
+}

@@ -1,0 +1,24 @@
+.src-box {
+	/* min-width: 400px; */
+}
+
+.src-box .panel-body {
+	height: 400px;
+	padding: 0;
+	overflow-y: scroll;
+}
+
+.nest,
+#content-box,
+#source-box {
+	padding: 0px;
+}
+
+#src-box-search {
+	/* min-width: 400px; */
+	height: auto;
+}
+
+#mut-table-box {
+	padding-right: 0px;
+}
