@@ -1,5 +1,5 @@
 define(
-	
+
 	function(require) {
 
 		return { initialize: initialize };
@@ -8,11 +8,11 @@ define(
 
 			require(['jquery',
 			         'domReady',
-			         'bootstrap'
-			         ], 
-			         
+			         'bootstrap',
+			         ],
+
 		  function ($, domReady, bootstrap) {
-				
+
 				// set ajax defaults
 				var appContext = (this.context() != "ROOT" ? this.context() + '/': '');
 				var defaultUrl = '/' + appContext + 'yada.jsp';
@@ -20,13 +20,17 @@ define(
 					url: defaultUrl,
 		      type: 'GET',
 		      dataType: 'json',
-		      data: { pz: -1 }
+		      data: { pz: -1 } //, r: 'RESTPassThruResponse' }
 				});
 
+				var renderer = require('component/renderer');
+				renderer.attachTo('body');
+
 				var nest = $('.nest');
-				
-				var mutationTable = require('component/mut-table');
-        mutationTable.attachTo('.nest');
+				var UI = require('component/ui');
+				UI.attachTo('.nest');
+				//var mutationTable = require('component/mut-table');
+        //mutationTable.attachTo('.nest');
 
 			});
 		}

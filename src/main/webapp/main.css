@@ -3,9 +3,30 @@
 }
 
 .src-box .panel-body {
+	position: relative;
 	height: 400px;
 	padding: 0;
 	overflow-y: scroll;
+}
+
+.src-search-clear {
+  pointer-events: auto;
+  display: none;
+  color: #AAA;
+  top: 10px;
+}
+
+.src-search-clear:hover {
+	cursor: pointer;
+}
+
+.study-attrib {
+	font-style: italic;
+	color: #AAA;
+}
+
+.study-name {
+	cursor: pointer;
 }
 
 .nest,
@@ -19,6 +40,47 @@
 	height: auto;
 }
 
-#mut-table-box {
+#src-box-search .panel-title span {
+	color: #CCC;
+}
+
+#result-box {
 	padding-right: 0px;
+}
+
+#study-list-sample-count,
+#gene-list-count {
+	color: #AAA;
+}
+
+#viz-trigger {
+	margin-top: 10px;
+}
+
+.nibr-gridVar-legend .nibr-gridVar-renderings rect {
+	stroke-width: 0;
+}
+
+/*
+loading gif
+*/
+.loader {
+	text-align: center;
+}
+
+.fa-refresh-animate {
+	padding: 20px;
+	color: #333;
+  -animation: spin .9s infinite linear;
+  -webkit-animation: spin2 .9s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
 }

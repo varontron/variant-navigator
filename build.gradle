@@ -4,6 +4,7 @@ def TOMCAT_HOME = System.getenv("TC_HOME")
 def TOMCAT_BIN  = System.getenv("TC_BIN")
 
 apply plugin: 'waroverlay'
+apply plugin: "name.mazgalov.vaadin.sass.compiler"
 
 repositories {
   mavenCentral()
@@ -17,16 +18,25 @@ repositories {
 buildscript {
     repositories {
         jcenter()
+        maven {
+          url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath "org.scaldingspoon.gradle:gradle-waroverlay-plugin:0.9.3"
+        classpath "gradle.plugin.name.mazgalov:gradle-sass-vaadin-compiler:0.1.1"
     }
 }
 
 dependencies {
-  runtime ('com.novartis.opensource:YADA-Quickstart:8.3.0@war') {
-    transitive = true 
+  runtime ('com.novartis.opensource:YADA-Quickstart:8.4.0@war') {
+    transitive = true
   }
+}
+
+compileSass {
+  scssFile = file("$projectDir/src/main/webapp/lib/gridvar/sass/gridvar.scss")
+  cssFile = file("$projectDir/src/main/webapp/lib/gridvar/sass/gridvar.css")
 }
 
 task shutdownTomcat(type:Exec) {
@@ -52,6 +62,13 @@ task copyToServer(dependsOn: ['war','cleanServer'], type:Copy) {
   into TOMCAT_HOME +'/webapps'
 }
 
+task buildHtmlTemplates(dependsOn: 'shutdownTomcat',type:Exec) {
+  commandLine 'hulk',"$projectDir/src/main/resources/template/*.hogan"
+  doFirst {
+    standardOutput = new FileOutputStream(new File("$projectDir/src/main/webapp/templates.js"))
+  }
+}
+
 warOverlay {
   includeWarJars true
 }
@@ -60,9 +77,15 @@ war {
   from('resources')  {
         include '*.properties'
         into 'WEB-INF/classes/'
-  }  
+  }
   exclude '**/yada-api-7.1.2.jar'
 }
-war.dependsOn shutdownTomcat
+war.dependsOn shutdownTomcat,compileSass,buildHtmlTemplates
 
-
+/*
+shutdownTomcat,
+compileSass,
+buildHtmlTemplates,
+war,
+warOverlay
+*/

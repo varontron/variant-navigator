@@ -10,7 +10,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
 <!-- EXTERNAL ARTIFACTS -->
-<!--<link href="//cdn.datatables.net/plug-ins/1.10.7/integration/font-awesome/dataTables.fontAwesome.css"/>-->
+<link href="//cdn.datatables.net/plug-ins/1.10.7/integration/font-awesome/dataTables.fontAwesome.css"/>
 <link
 	href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css"
 	rel="stylesheet" />
@@ -22,6 +22,16 @@
 <link 
   href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.css"
   rel="stylesheet" />
+<link 
+  href="lib/gridvar/sass/gridvar.css"
+  rel="stylesheet"/>
+<link 
+  href="lib/mutationMapper/mutationMapper.css"
+  rel="stylesheet"/>
+<link
+  href="http://cdnjs.cloudflare.com/ajax/libs/qtip2/3.0.3/jquery.qtip.min.css"
+  rel="stylesheet"/>
+
 <!-- YADA and app css -->
 <link href="main.css" rel="stylesheet" />
 
@@ -56,46 +66,15 @@
 				  <div id="src-box-search">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Search</h3>
+                <h3 class="panel-title">Search for Studies<span> (Min 4 chars)</span></h3>
               </div>
               <div class="panel-body">
                 <form>
-                <input type="text" id="src-search" class="form-control"/>
+                  <div class="form-group has-feedback">
+	                 <input type="text" id="src-search" class="form-control"/>
+	                 <span><i class="src-search-clear fa fa-times-circle-o fa-lg form-control-feedback"></i></span>
+	                </div>
                 </form>
-              </div>
-            </div>
-          </div>
-					<div id="src-box-cbio" class="src-box">
-						<div class="panel panel-default">
-							<div class="panel-heading">
-								<h3 class="panel-title">CBio</h3>
-							</div>
-							<div class="panel-body">
-                <div class="tree"></div>
-              </div>
-						</div>
-					</div>
-					<div id="src-box-vardb" class="src-box">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">VarDB</h3>
-              </div>
-              <div class="panel-body">
-                <ul>
-                
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div id="src-box-vert" class="src-box">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">Vertica</h3>
-              </div>
-              <div class="panel-body">
-                <ul>
-                
-                </ul>
               </div>
             </div>
           </div>
@@ -104,20 +83,24 @@
 				  <div class="res-box">
 				    <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Selected Studies</h3>
+                <h3 id="study-list-hdr" class="panel-title">Selected Studies <span id="study-list-sample-count"></span></span></h3>
               </div>
               <div class="panel-body">
-                <table id="study-list"></table>
+                <div id="study-list"></div>
               </div>
             </div>
           </div>  
           <div class="res-box">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Selected Genes</h3>
+                <h3 id="gene-list-hdr" class="panel-title">Selected Genes <span id="gene-list-count"></span></h3>
               </div>
               <div class="panel-body">
-                <table id="gene-list"></table>
+                <form>
+                  <label for="gene-list">Enter genes of interest (e.g., SOX9 RAN TNK2 EP300 PXN NCOA2 AR NRIP1 NCOR1 NCOR2:)</label>
+                  <textarea id="gene-list" class="form-control"></textarea>
+                  <button id="viz-trigger" type="submit" value="Submit" class="btn btn-default btn-disabled">Submit</button>
+                </form>
               </div>
             </div>
           </div>
@@ -127,7 +110,10 @@
                 <h3 class="panel-title">Visualizations</h3>
               </div>
               <div class="panel-body">
-                <table id="study-list"></table>
+                <div id="viz-list">
+                  <div id="gridvar"></div>
+                  <div id="mutmap"></div>
+                </div>
               </div>
             </div>
           </div>
