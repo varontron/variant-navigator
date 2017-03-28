@@ -1,0 +1,125 @@
+.nibr-gridVar-left {
+	float: left;
+	width: auto;
+}
+
+text.nibr-gridVar {
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 10px;
+}
+
+.nibr-gridVar-container {
+	width: auto;
+	max-width: 85%;
+	overflow: auto;
+}
+
+.nibr-gridVar-heatmap .row {
+	cursor: pointer;
+}
+
+.nibr-gridVar-heatmap .row rect {
+	stroke: white;
+	stroke-width: 0px;
+	opacity: 1;
+}
+
+.nibr-gridVar-heatmap .row .current .clicked rect {
+	stroke: black;
+}
+
+.nibr-gridVar-heatmap .row .current text {
+	font-weight: bold;
+}
+
+.nibr-gridVar-heatmap .row .current .column text {
+	font-weight: normal;
+}
+
+.nibr-gridVar-axis.y {
+	shape-rendering: crispEdges;
+}
+
+.nibr-gridVar-axis.y path, .nibr-gridVar-axis.y line {
+	fill: none;
+	stroke-width: 0;
+}
+
+.nibr-gridVar-axis.x {
+	shape-rendering: crispEdges;
+}
+
+.nibr-gridVar-axis.x path, .nibr-gridVar-axis.x line {
+	fill: gray;
+	stroke: gray;
+}
+
+rect.nibr-gridVar-bar {
+	stroke: white;
+	fill: #afafaf;
+}
+
+.nibr-gridVar-xaxis path, .nibr-gridVar-xaxis line {
+	fill: none;
+	stroke: gray;
+	stroke-width: 1;
+	shape-rendering: crispEdges;
+}
+
+.nibr-gridVar-xaxis text {
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 10px;
+	fill: gray;
+	text-anchor: end;
+}
+
+.nibr-gridVar-yaxis text {
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 10px;
+	fill: gray;
+}
+
+.nibr-gridVar-x.label {
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 10px;
+	fill: gray;
+	text-anchor: end;
+}
+
+.nibr-gridVar-legend svg {
+	padding: 5px;
+}
+
+.nibr-gridVar-legend-category-label {
+	font-size: 10px;
+	fill: gray;
+	font-family: "Lucida Console", Monaco, monospace;
+}
+
+.nibr-gridVar-legend-label {
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 10px;
+	color: #646464;
+}
+
+.nibr-gridVar-legend-swatch {
+	stroke: #a9a9a9;
+	stroke-width: 1px;
+}
+
+.nibr-gridVar-legend-glyph {
+	stroke: #444444;
+	stroke-width: 2;
+	fill: none;
+}
+
+.nibr-gridVar-exportButtons {
+	font-size: 11px;
+	color: #6464dc;
+	margin: 0px 4px 0px 4px;
+}
+
+.nibr-gridVar-exportButtons:hover {
+	text-decoration: underline;
+	color: #6464dc;
+}
